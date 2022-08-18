@@ -38,7 +38,7 @@ public class Producto implements Serializable {
     @Column(name = "stock", nullable = false)
     private int stock;
 
-    @Column(name = "foto", nullable = false)
+    @Column(name = "foto", nullable = true)
     private String foto;
 
     public Producto() {

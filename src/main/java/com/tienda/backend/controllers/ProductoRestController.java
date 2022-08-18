@@ -1,7 +1,13 @@
 package com.tienda.backend.controllers;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -19,17 +25,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tienda.backend.dtos.ProductoDto;
+import com.lowagie.text.DocumentException;
 import com.tienda.backend.exceptions.NotFoundException;
+import com.tienda.backend.models.dtos.ProductoDto;
 import com.tienda.backend.models.entity.Producto;
 import com.tienda.backend.responses.ProductoResponse;
 import com.tienda.backend.services.iProductoService;
 import com.tienda.backend.services.iUploadFileService;
+import com.tienda.backend.view.pdf.ProductoPdf;
 
 @RestController
 @CrossOrigin()
@@ -242,6 +249,27 @@ public class ProductoRestController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename\"" + recurso.getFilename())
                 .body(recurso);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/export", produces = MediaType.APPLICATION_PDF_VALUE)
+    public void exportProductsToPdf(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+        DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=productos_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+        List<Producto> productos = null;
+        try {
+            productos = productoService.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ProductoPdf exporter = new ProductoPdf(productos);
+        exporter.export(response);
     }
 
     /**

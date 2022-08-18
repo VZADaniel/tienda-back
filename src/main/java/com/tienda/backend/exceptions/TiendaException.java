@@ -3,7 +3,7 @@ package com.tienda.backend.exceptions;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tienda.backend.dtos.ErrorDto;
+import com.tienda.backend.models.dtos.ErrorDto;
 
 public abstract class TiendaException extends Exception {
     private final String code;

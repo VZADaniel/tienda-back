@@ -1,4 +1,4 @@
-package com.tienda.backend.dtos;
+package com.tienda.backend.models.dtos;
 
 import java.io.Serializable;
 

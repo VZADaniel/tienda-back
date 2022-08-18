@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import org.springframework.http.HttpStatus;
 
-import com.tienda.backend.dtos.ErrorDto;
+import com.tienda.backend.models.dtos.ErrorDto;
 
 public class NotFoundException extends TiendaException {
     private static final long serialVersionUID = 1L;

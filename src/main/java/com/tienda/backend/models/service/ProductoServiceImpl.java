@@ -3,11 +3,13 @@ package com.tienda.backend.models.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tienda.backend.models.dao.ProductoDAO;
 import com.tienda.backend.models.entity.Producto;
 
+@Service
 public class ProductoServiceImpl implements ProductoService {
 
 	

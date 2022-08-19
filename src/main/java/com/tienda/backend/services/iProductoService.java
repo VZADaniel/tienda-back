@@ -10,6 +10,8 @@ public interface iProductoService {
 
     public List<Producto> findAllOrderByStockDesc() throws TiendaException;
 
+    public List<Producto> findAllByStockGreaterThan(int stock);
+
     public Producto findById(Long id) throws TiendaException;
 
     public Producto findByCodigo(String codigo) throws TiendaException;

@@ -86,6 +86,22 @@ public class ProductoRestController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/stock-gt-zero", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ProductoResponse<List<Producto>> findAllByStockGreaterThan() {
+        List<Producto> productos = null;
+        try {
+            productos = productoService.findAllByStockGreaterThan(1);
+        } catch (Exception e) {
+            return new ProductoResponse<>("INTERNAL_SERVER_ERROR", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR),
+                    "No se ha podido ejecutar al consulta");
+        }
+
+        return new ProductoResponse<>("OK", String.valueOf(HttpStatus.OK),
+                "Productos encontrados ".concat(String.valueOf(productos.size())),
+                productos);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductoResponse<Producto> findById(@PathVariable long id) {
         Producto producto = null;

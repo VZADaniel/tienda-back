@@ -29,6 +29,12 @@ public class ProductoServiceImpl implements iProductoService {
 
     @Override
     @Transactional(readOnly = true)
+    public List<Producto> findAllByStockGreaterThan(int stock) {
+        return productoRepository.findAllByStockGreaterThanEqual(stock);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public List<Producto> findAllOrderByStockDesc() throws TiendaException {
         return productoRepository.findAllByOrderByStockDesc();
     }

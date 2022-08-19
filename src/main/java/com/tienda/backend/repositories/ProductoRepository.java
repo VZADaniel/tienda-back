@@ -16,6 +16,8 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     public List<Producto> findAllByOrderByStockDesc();
 
+    public List<Producto> findAllByStockGreaterThanEqual(int stock);
+
     public Optional<Producto> findByCodigo(String codigo);
 
     @Modifying

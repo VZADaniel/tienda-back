@@ -38,8 +38,8 @@ import com.tienda.backend.services.iProductoService;
 import com.tienda.backend.services.iUploadFileService;
 import com.tienda.backend.view.pdf.ProductoPdf;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")  //CORS Cross Origin Resource Sharing
 @RestController
-@CrossOrigin()
 @RequestMapping("/api/productos")
 public class ProductoRestController {
 
@@ -150,6 +150,7 @@ public class ProductoRestController {
             productoEntity.setFoto(uriFoto);
             nuevoProducto = productoService.save(productoEntity);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ProductoResponse<>("INTERNAL_SERVER_ERROR",
                     String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR),
                     "No se ha podido ejecutar al consulta");
@@ -171,7 +172,7 @@ public class ProductoRestController {
         try {
             Producto productoDb = productoService.findById(id);
 
-            if (productoDb.getId() != null && productoDb.getFoto() != null && productoDb.getFoto().length() > 0) {
+            if (productoDb.getId() != null && productoDb.getFoto() != null && productoDb.getFoto().length() > 0 && productoDb.getId() > 16) {
                 uploadFileService.delete(productoDb.getFoto());
             }
 

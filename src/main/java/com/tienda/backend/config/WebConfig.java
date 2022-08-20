@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-public class FileConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Override

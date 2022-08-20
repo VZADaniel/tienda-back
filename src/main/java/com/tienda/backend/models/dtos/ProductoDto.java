@@ -112,7 +112,6 @@ public class ProductoDto implements Serializable {
     public void setFoto(MultipartFile foto) {
         this.foto = foto;
     }
-
     /*
      * (non-Javadoc)
      * 
@@ -124,5 +123,4 @@ public class ProductoDto implements Serializable {
         return "ProductoDto [codigo=" + codigo + ", descripcion=" + descripcion + ", foto=" + foto + ", id=" + id
                 + ", nombre=" + nombre + ", precio=" + precio + ", stock=" + stock + "]";
     }
-
 }

@@ -97,7 +97,9 @@ public class ProductoServiceImpl implements iProductoService {
                 () -> new NotFoundException("PRODUCTO_NOT_FOUND_404", "PRODUCTO ID: " + id + "NO ENCONTRADO"));
 
         try {
-            uploadFileService.delete(producto.getFoto());
+            if(id > 16){
+                uploadFileService.delete(producto.getFoto());
+            }
             productoRepository.deleteById(id);
         } catch (Exception e) {
             throw new InternalServerErrorException("INTERNAL_SERVER_ERROR", "Error al ejecutar la consulta");

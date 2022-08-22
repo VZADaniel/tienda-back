@@ -6,7 +6,7 @@ public class ProductoResponse<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String status;
-    private String code;
+    private int code;
     private String message;
     private T data;
 
@@ -16,7 +16,7 @@ public class ProductoResponse<T> implements Serializable {
      * @param message
      * @param data
      */
-    public ProductoResponse(String status, String code, String message, T data) {
+    public ProductoResponse(String status, int code, String message, T data) {
         this.status = status;
         this.code = code;
         this.message = message;
@@ -28,7 +28,7 @@ public class ProductoResponse<T> implements Serializable {
      * @param code
      * @param message
      */
-    public ProductoResponse(String status, String code, String message) {
+    public ProductoResponse(String status, int code, String message) {
         this.status = status;
         this.code = code;
         this.message = message;
@@ -51,14 +51,14 @@ public class ProductoResponse<T> implements Serializable {
     /**
      * @return the code
      */
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
     /**
      * @param code the code to set
      */
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

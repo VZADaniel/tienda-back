@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lowagie.text.DocumentException;
 import com.tienda.backend.exceptions.NotFoundException;
+import com.tienda.backend.models.dtos.ItemCartDto;
 import com.tienda.backend.models.dtos.PedidoDto;
 import com.tienda.backend.models.dtos.ProductoDto;
 import com.tienda.backend.models.entity.Producto;
@@ -63,11 +64,11 @@ public class ProductoRestController {
     try {
       productos = productoService.findAll();
     } catch (Exception e) {
-      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR),
+      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR.value(),
           "No se ha podido ejecutar al consulta");
     }
 
-    return new ProductoResponse<>("OK", String.valueOf(HttpStatus.OK),
+    return new ProductoResponse<>("OK", HttpStatus.OK.value(),
         "Productos encontrados ".concat(String.valueOf(productos.size())),
         productos);
   }
@@ -79,11 +80,11 @@ public class ProductoRestController {
     try {
       productos = productoService.findAllOrderByStockDesc();
     } catch (Exception e) {
-      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR),
+      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR.value(),
           "No se ha podido ejecutar al consulta");
     }
 
-    return new ProductoResponse<>("OK", String.valueOf(HttpStatus.OK),
+    return new ProductoResponse<>("OK", HttpStatus.OK.value(),
         "Productos encontrados ".concat(String.valueOf(productos.size())),
         productos);
   }
@@ -95,11 +96,11 @@ public class ProductoRestController {
     try {
       productos = productoService.findAllByStockGreaterThan(1);
     } catch (Exception e) {
-      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR),
+      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR.value(),
           "No se ha podido ejecutar al consulta");
     }
 
-    return new ProductoResponse<>("OK", String.valueOf(HttpStatus.OK),
+    return new ProductoResponse<>("OK", HttpStatus.OK.value(),
         "Productos encontrados ".concat(String.valueOf(productos.size())),
         productos);
   }
@@ -111,14 +112,14 @@ public class ProductoRestController {
     try {
       producto = productoService.findById(id);
     } catch (NotFoundException notFound) {
-      return new ProductoResponse<>(notFound.getCode(), String.valueOf(HttpStatus.NOT_FOUND),
+      return new ProductoResponse<>(notFound.getCode(), HttpStatus.NOT_FOUND.value(),
           notFound.getMessage());
     } catch (Exception e) {
-      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR),
+      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR.value(),
           "No se ha podido ejecutar al consulta");
     }
 
-    return new ProductoResponse<>("OK", String.valueOf(HttpStatus.OK),
+    return new ProductoResponse<>("OK", HttpStatus.OK.value(),
         "Producto ID:" + id + " encontrado",
         producto);
   }
@@ -130,14 +131,14 @@ public class ProductoRestController {
     try {
       producto = productoService.findByCodigo(codigo);
     } catch (NotFoundException notFound) {
-      return new ProductoResponse<>(notFound.getCode(), String.valueOf(HttpStatus.NOT_FOUND),
+      return new ProductoResponse<>(notFound.getCode(), HttpStatus.NOT_FOUND.value(),
           notFound.getMessage());
     } catch (Exception e) {
-      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR),
+      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR.value(),
           "No se ha podido ejecutar al consulta");
     }
 
-    return new ProductoResponse<>("OK", String.valueOf(HttpStatus.OK),
+    return new ProductoResponse<>("OK", HttpStatus.OK.value(),
         "Producto CÓDIGO:" + codigo + " encontrado",
         producto);
   }
@@ -155,11 +156,11 @@ public class ProductoRestController {
     } catch (Exception e) {
       e.printStackTrace();
       return new ProductoResponse<>("INTERNAL_SERVER_ERROR",
-          String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR),
+          HttpStatus.INTERNAL_SERVER_ERROR.value(),
           "No se ha podido ejecutar al consulta");
     }
 
-    return new ProductoResponse<>("CREATED", String.valueOf(HttpStatus.CREATED),
+    return new ProductoResponse<>("CREATED", HttpStatus.CREATED.value(),
         "Producto creado con éxito",
         nuevoProducto);
   }
@@ -184,14 +185,14 @@ public class ProductoRestController {
       productoEntity.setFoto(uriFoto);
       productoActualizado = productoService.save(productoEntity);
     } catch (NotFoundException notFound) {
-      return new ProductoResponse<>(notFound.getCode(), String.valueOf(HttpStatus.NOT_FOUND),
+      return new ProductoResponse<>(notFound.getCode(), HttpStatus.NOT_FOUND.value(),
           notFound.getMessage());
     } catch (Exception e) {
-      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR),
+      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR.value(),
           "No se ha podido ejecutar al consulta");
     }
 
-    return new ProductoResponse<>("UPDATED", String.valueOf(HttpStatus.OK),
+    return new ProductoResponse<>("UPDATED", HttpStatus.OK.value(),
         "Producto ID:" + id + " actualizado con éxito", productoActualizado);
   }
 
@@ -202,14 +203,14 @@ public class ProductoRestController {
     try {
       message = productoService.deleteById(id);
     } catch (NotFoundException notFound) {
-      return new ProductoResponse<>(notFound.getCode(), String.valueOf(HttpStatus.NOT_FOUND),
+      return new ProductoResponse<>(notFound.getCode(), HttpStatus.NOT_FOUND.value(),
           notFound.getMessage());
     } catch (Exception e) {
-      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR),
+      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR.value(),
           "No se ha podido ejecutar al consulta");
     }
 
-    return new ProductoResponse<>("DELETED", String.valueOf(HttpStatus.OK), message);
+    return new ProductoResponse<>("DELETED", HttpStatus.OK.value(), message);
   }
 
   @ResponseStatus(HttpStatus.ACCEPTED)
@@ -219,14 +220,14 @@ public class ProductoRestController {
     try {
       message = productoService.deleteByCodigo(codigo);
     } catch (NotFoundException notFound) {
-      return new ProductoResponse<>(notFound.getCode(), String.valueOf(HttpStatus.NOT_FOUND),
+      return new ProductoResponse<>(notFound.getCode(), HttpStatus.NOT_FOUND.value(),
           notFound.getMessage());
     } catch (Exception e) {
-      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR),
+      return new ProductoResponse<>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR.value(),
           "No se ha podido ejecutar al consulta");
     }
 
-    return new ProductoResponse<>("DELETED", String.valueOf(HttpStatus.OK), message);
+    return new ProductoResponse<>("DELETED", HttpStatus.OK.value(), message);
   }
 
   /**
@@ -318,20 +319,20 @@ public class ProductoRestController {
     }
   }
 
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @ResponseStatus(HttpStatus.ACCEPTED)
   @PostMapping(value = "/checkout", produces = MediaType.APPLICATION_JSON_VALUE)
-  public void generarVenta(@RequestBody PedidoDto pedido, HttpServletResponse response) throws DocumentException, IOException {
-    response.setContentType("application/pdf");
-    DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
-    String currentDateTime = dateFormatter.format(new Date());
-
-    String headerKey = "Content-Disposition";
-    String headerValue = "attachment; filename=productos_" + currentDateTime + ".pdf";
-    response.setHeader(headerKey, headerValue);
-    response.setStatus(200);
-
-    DetalleVentaPdf exporter = new DetalleVentaPdf(pedido.getCliente(), pedido.getEnvio(), pedido.getProductos());
-
-    exporter.export(response);
+  public ProductoResponse<PedidoDto> generarVenta(@RequestBody PedidoDto pedido) {
+    for (ItemCartDto item : pedido.getProductos()) {
+      Producto producto = null;
+      try {
+        producto = productoService.findById(item.getId());
+        producto.setStock(producto.getStock() - item.getCantidad());
+        productoService.save(producto);
+      } catch (Exception e) {
+        
+      }
+    }
+    
+    return new ProductoResponse<>("OK", HttpStatus.ACCEPTED.value(), "Venta generada con éxito",pedido);
   }
 }

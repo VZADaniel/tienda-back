@@ -3,7 +3,6 @@ package com.tienda.backend.view.pdf;
 import java.awt.Color;
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 
@@ -82,12 +81,12 @@ public class ProductoPdf {
         table.setWidthPercentage(100f);
         table.setWidths(new float[] {1.5f, 3.5f, 3.0f, 3.0f});
         table.setSpacingBefore(10);
-         
+
         writeTableHeader(table);
         writeTableData(table);
-         
+
         document.add(table);
-         
+
         document.close();
     }
 }
